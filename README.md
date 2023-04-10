@@ -1,4 +1,56 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/hvqqnbiwmo90m2fd?svg=true)](https://ci.appveyor.com/project/gs-jenkins/raw2ometiff)
+# Raw2ometiff Conda Fork
+
+This project is a fork of the original [raw2ometiff](https://github.com/glencoesoftware/raw2ometiff) repository, created to facilitate building and using the software within a Conda environment. The primary goal of this fork is to make the setup process easier and more accessible for users who prefer to work with Conda environments. Please note that this fork and its modifications are not affiliated with or endorsed by the original authors of the raw2ometiff project.
+
+Please note that this fork is not the main project repository, and any issues or contributions related to the original codebase should be directed to the [original authors' project](https://github.com/glencoesoftware/raw2ometiff).
+
+## About raw2ometiff
+
+Raw2ometiff is a tool for converting raw images broken down by bioformats2raw into OME-tiff format for visualization.
+
+For more information, please refer to the original [README.md](https://github.com/glencoesoftware/raw2ometiff/blob/master/README.md) file in the original repository.
+
+## Usage and Installation
+
+Please follow the instructions provided in this repository for installing and using the bioformats2raw tool in a Conda environment. If you have any questions or issues related to the Conda-specific setup or usage, feel free to open an issue in this forked repository.
+
+### 1. Create your conda enviornment
+
+`$ conda env create -f environment.yml -n bioformats2raw`
+
+### 2. Build the Jar and create the script to executing using Gradle
+
+`$ ./gradlew clean shadowJar createRaw2ometiffScript`
+
+### 3. Run raw2ometiff
+
+```
+$ ./build/scripts/raw2ometiff 
+Missing required parameters: <inputDirectory>, <outputFilePath>
+Usage: <main class> [-p] [--legacy] [--rgb] [--version] [--debug[=<logLevel>]]
+                    [--compression=<compression>] [--max_workers=<maxWorkers>]
+                    [--quality=<compressionQuality>] <inputDirectory>
+                    <outputFilePath>
+      <inputDirectory>   Directory containing pixel data to convert
+      <outputFilePath>   Relative path to the output OME-TIFF file
+      --compression=<compression>
+                         Compression type for output OME-TIFF file
+                           (Uncompressed, LZW, JPEG-2000, JPEG-2000 Lossy,
+                           JPEG, zlib; default: LZW)
+      --debug, --log-level[=<logLevel>]
+                         Change logging level; valid values are OFF, ERROR,
+                           WARN, INFO, DEBUG, TRACE and ALL. (default: WARN)
+      --legacy           Write a Bio-Formats 5.9.x pyramid instead of OME-TIFF
+      --max_workers=<maxWorkers>
+                         Maximum number of workers (default: 72)
+      --quality=<compressionQuality>
+                         Compression quality
+      --rgb              Attempt to write channels as RGB; channel count must
+                           be a multiple of 3
+  -p, --progress         Print progress bars during conversion
+      --version          Print version information and exit
+```
+
 
 raw2ometiff converter
 =====================
