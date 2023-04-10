@@ -3,6 +3,32 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+shadowJar {
+    archiveBaseName.set('raw2ometiff')
+    archiveClassifier.set('')
+    archiveVersion.set(project.version)
+    manifest {
+        attributes 'Main-Class': 'com.glencoesoftware.raw2ometiff.Converter'
+    }
+}
+
+application {
+    // Use the Shadow JAR in the distribution
+    applicationDistribution.from shadowJar
+
+}
+
+task createRaw2ometiffScript(type: Copy) {
+    dependsOn shadowJar
+    from 'scripts/raw2ometiff_template.sh'
+    into 'build/scripts'
+    rename 'raw2ometiff_template.sh', 'raw2ometiff'
+    doLast {
+        new File('build/scripts/raw2ometiff').setExecutable(true)
+    }
 }
 
 group = 'com.glencoesoftware'
@@ -106,3 +132,4 @@ publishing {
 checkstyle {
     toolVersion = "8.26"
 }
+
