@@ -1,6 +1,7 @@
 name: raw2ometiff
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - python >=3.9
   - numpy
