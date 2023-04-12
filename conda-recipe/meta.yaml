@@ -1,0 +1,41 @@
+package:
+  name: raw2ometiff
+  version: 0.4.1
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script:
+    - ./gradlew clean shadowJar createRaw2ometiffScript  # Build the project
+    - mkdir -p "${PREFIX}/bin"  # Create the bin directory in the conda environment
+    - cp "./build/bin/raw2ometiff" "${PREFIX}/bin/"  # Copy the script to the conda environment
+    - mkdir -p "${PREFIX}/libs"  # Create the libs directory in the conda environment
+    - JAR_FILE=$(find "./build/libs" -iname 'raw2ometiff*.jar' | head -n 1)
+    - cp "$JAR_FILE" "${PREFIX}/libs/"  # Copy the JAR file to the conda environment
+  script_env:
+    - GRADLE_OPTS="-Dorg.gradle.daemon=false"
+
+requirements:
+  build:
+    - python >=3.9
+    - numpy
+    - pandas
+    - gradle =7.4.2
+    - openjdk >=8
+
+  run:
+    - python >=3.9
+    - numpy
+    - pandas
+    - openjdk >=8
+
+test:
+  commands:
+    - raw2ometiff --help
+
+about:
+  home: https://github.com/jason-weirather/raw2ometiff
+  license: GPL
+  summary: 'Not an official distriubtion.  A tool to convert raw to OME-tiff'

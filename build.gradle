@@ -24,10 +24,10 @@ application {
 task createRaw2ometiffScript(type: Copy) {
     dependsOn shadowJar
     from 'scripts/raw2ometiff_template.sh'
-    into 'build/scripts'
+    into 'build/bin'
     rename 'raw2ometiff_template.sh', 'raw2ometiff'
     doLast {
-        new File('build/scripts/raw2ometiff').setExecutable(true)
+        new File('build/bin/raw2ometiff').setExecutable(true)
     }
 }
 
