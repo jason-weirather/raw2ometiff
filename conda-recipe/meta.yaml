@@ -19,6 +19,7 @@ build:
 
 requirements:
   build:
+    - c-blosc =1.10.2
     - python >=3.9
     - numpy
     - pandas
@@ -26,10 +27,14 @@ requirements:
     - openjdk >=8
 
   run:
+    - c-blosc =1.10.2
     - python >=3.9
     - numpy
     - pandas
     - openjdk >=8
+  
+  channels:
+    - free
 
 test:
   commands:
